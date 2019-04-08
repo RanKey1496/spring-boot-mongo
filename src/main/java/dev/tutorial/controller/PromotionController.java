@@ -38,11 +38,18 @@ public class PromotionController {
 	}
 
 	@PostMapping("/")
-	public String saveNewProperty(@RequestBody Promotion property) {
+	public String saveNewProperty(@RequestBody(required = true) Promotion property) {
+		System.out.println(property.getId());
 		Promotion saved = promotionRepository.save(property);
 		if (saved == null)
 			return "Ha ocurrido un error al guardar la propiedad";
 		return "Propiedad guardada satisfactoriamente";
+	}
+
+	@PostMapping("/all")
+	public String saveAllPromotions(@RequestBody List<Promotion> promotions) {
+		promotionRepository.saveAll(promotions);
+		return "Las propiedades se han guardado satisfactoriamente";
 	}
 
 	@PutMapping("/")
