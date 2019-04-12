@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/openjdk:8-jdk
     working_directory: ~/repo
@@ -18,4 +18,31 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
-      - run: mvn clean package
+      - run: mvn test
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    working_directory: ~/repo
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - run:
+          name: Setup Env
+          command: |
+            echo 'export TAG=0.1.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: mvn dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Build docker image
+          command: docker build -t sample:${TAG} .
