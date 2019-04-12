@@ -1,5 +1,7 @@
 package dev.tutorial;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +13,7 @@ public class SpringMongoExampleApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		assertEquals(true, true);
 	}
 
 }
