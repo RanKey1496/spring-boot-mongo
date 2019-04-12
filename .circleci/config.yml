@@ -49,20 +49,3 @@ jobs:
             docker build -t rankey/sample:$TAG .
             echo totoycent50 | docker login -u rankey --password-stdin
             docker push rankey/sample:$TAG    
-  workflows:
-    version: 2
-    build_and_deploy:
-      jobs:
-        - test
-        - build:
-            branches:
-              only:
-                - master
-            requires:
-              - test
-        - deploy:
-            branches:
-              only:
-                - master
-            requires:
-              - build 
