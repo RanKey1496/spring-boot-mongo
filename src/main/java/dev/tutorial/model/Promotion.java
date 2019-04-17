@@ -9,7 +9,7 @@ public class Promotion {
 	@Id
 	private String id;
 
-	private String value;
+	private Integer value;
 	private String status;
 	private Property property;
 
@@ -21,11 +21,11 @@ public class Promotion {
 		this.id = id;
 	}
 
-	public String getValue() {
+	public Integer getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public void setValue(Integer value) {
 		this.value = value;
 	}
 

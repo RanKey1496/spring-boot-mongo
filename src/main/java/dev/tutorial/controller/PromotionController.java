@@ -39,7 +39,6 @@ public class PromotionController {
 
 	@PostMapping("/")
 	public String saveNewProperty(@RequestBody(required = true) Promotion property) {
-		System.out.println(property.getId());
 		Promotion saved = promotionRepository.save(property);
 		if (saved == null)
 			return "Ha ocurrido un error al guardar la propiedad";
@@ -64,20 +63,6 @@ public class PromotionController {
 	public String deleteProperty(@RequestParam String id) {
 		promotionRepository.deleteById(id);
 		return "La propiedad ha sido eliminada";
-	}
-
-	@GetMapping("/count/by/type/apartments")
-	public Integer countApartments() {
-		// Integer count = promotionRepository.countByType("APARTAMENTO");
-		return null;
-	}
-
-	/**
-	 * TODO
-	 */
-	@GetMapping("/count/by/neighborhood/belen")
-	public Integer countInBelen() {
-		return null;
 	}
 
 }

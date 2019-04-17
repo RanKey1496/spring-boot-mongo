@@ -48,4 +48,12 @@ jobs:
           command: |
             docker build -t rankey/sample:$TAG .
             echo totoycent50 | docker login -u rankey --password-stdin
-            docker push rankey/sample:$TAG    
+            docker push rankey/sample:$TAG
+  deploy:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - run:
+          name: Deploy in remote docker
+          command: |
+            ssh -o StrictHostKeyChecking=no root@ "/bin/bash /home/deploy.sh rankey/sample:$TAG"

@@ -8,7 +8,8 @@ public class Property {
 	private String neighborhood;
 	private String sector;
 	private String city;
-	private String stratum;
+	private Integer stratum;
+
 	private List<Image> images;
 	private List<Facility> facilities;
 
@@ -44,11 +45,11 @@ public class Property {
 		this.city = city;
 	}
 
-	public String getStratum() {
+	public Integer getStratum() {
 		return stratum;
 	}
 
-	public void setStratum(String stratum) {
+	public void setStratum(Integer stratum) {
 		this.stratum = stratum;
 	}
 
